@@ -19,14 +19,16 @@
 
 
     // animai=>是動物的總稱，也是抽象的，所以可以拿來當宣告
-
+    // class是一個藍圖 => 需要實例化
     class Animal {
         // 需要加上封裝才能使用$
         public $type='animal';
         public $name='John';
         public $hair_color='black';
+        public $feet=['front-left','front-right','back-left','back-right'];
 
 
+        // function=>預設為public
         function __construct($type,$name,$hair_color){
             $this->type=$type;
             $this->name=$name;
@@ -37,12 +39,19 @@
             echo $this->name.' is running';
         }
 
-        function speed(){
+        public function speed(){
             echo $this->name.' is running at 20km/h';
         }
 
 
+        public function getName(){
+            return $this->name;
+        }
 
+
+        public function setName($name){
+                $this->name=$name;
+        }
 
     }
 
@@ -55,11 +64,18 @@ $cat=new Animal('cat','kitty','white');
 
 // 物件裡的"->"是取用的意思
 
-echo $cat->type;
-echo $cat->name;
-echo $cat->hair_color;
+// echo $cat->type;
+echo $cat->getName();
+// echo $cat->name;
+// echo $cat->hair_color;
 echo $cat->run();
 echo $cat->speed();
+// print_r($cat->feet);
+
+$cat->name=('John');
+echo $cat->getName();
+
+
 
 
 
