@@ -56,6 +56,11 @@
             $this->name=$name;
         }
 
+        function getFeet(){
+            return $this->feet;
+        }
+
+
     }
 
 
@@ -64,7 +69,7 @@
 // 物件的使用發法先實例化
 // 實例化(instance) =>常用於遊戲內的副本
 $cat=new Animal('cat','kitty','white');
-
+print_r($cat->getFeet());
 // 物件裡的"->"是取用的意思
 
 // echo $cat->type;
@@ -110,7 +115,7 @@ Interface Behavior{
 
 
 $mycat=new Cat('white');
-
+print_r($mycat->getFeet());
 echo $mycat->getName();
 echo "<br>";
 echo $mycat->run();
@@ -122,9 +127,48 @@ echo $mycat->getName();
 echo "<br>";
 echo $mycat->jump();
 
-
-
 ?>
+ <h1>靜態宣告</h1>
 
+ <?php
+class Dog extends Animal implements Behavior{
+    protected $type='dog';
+    protected $name='Doggy';
+    protected static  $count=0;
+    //static $count=0;
+
+    function __construct($hair_color){
+        $this->hair_color=$hair_color;
+        self::$count++;
+    }
+
+    function bark(){
+        echo $this->name . " is barking";
+    }
+
+    function getFeet(){
+        return $this->feet;
+    }
+
+    static function getCount(){
+        return self::$count;
+    }
+
+    function jump(){
+        echo $this->name . " jumpping 1m";
+    }
+}
+
+echo Dog::getCount();
+
+$dog1=new Dog('brown');
+$dog2=new Dog('black');
+$dog3=new Dog('orange');
+$dog4=new Dog('white');
+$dog5=new Dog('white');
+
+
+echo Dog::getCount();
+?>
 </body>
 </html>
