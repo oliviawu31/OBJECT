@@ -84,16 +84,21 @@ class DB{
         if(isset($array['id'])){
             //update
             // update table set `欄位1`='值1',`欄位2`='欄位2' where `id`='值'
+            // 因為新增裡無法有id，所以用unset刪掉
+            $id=$array['id'];
+            unset($array['id']);
             $set=$this->a2s($array);
-            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='{$array['id']}'";
+            $sql ="UPDATE $this->table SET ".join(',',$set)." where `id`='$id'";
                 
         }else{
             //insert
             $cols=array_keys($array);
-            
             $sql="INSERT INTO $this->table (`".join("`,`",$cols)."`) VALUES('".join("','",$array)."')";
-            return $this->pdo->exec($sql);
+
         }
+    
+        echo $sql;
+        return $this->pdo->exec($sql);
     }
 
 
@@ -146,7 +151,7 @@ $DEPT=new DB('dept');
 // $DEPT->del(['code'=>'401']);
 
 //如果有id 就無法新增 
-$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊部']);
+$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊發展部']);
 dd($dept);
 
 
