@@ -8,19 +8,47 @@ class DB{
     protected $pdo;
     protected $table;
 
+    // 建構式帶參數
     function __construct($table){
         // pdo主要將內容傳出去
         $this->table = $table;
         $this->pdo = new PDO($this->dsn,'root','');
     }
 
+    /**
+     * 撈出全部資料 
+     * 
+     * 
+     */
+
     function all(){
         return $this->q("SELECT * FROM $this->table");
     }
 
-    function q($sql){
+    // 將陣列轉成條件字串陣列
+
+    function toWhere($array){
+        $tmp=[];
+
+
+        foreach($array as $key => $value){
+            $tmp[]="`$key`='$value'";
+        }
+        return $tmp;
+    }
+
+    function fetchOne($sql){
+        // echo $sql;
+        return $this->pdo->query($sql)->fetch();
+    }
+    function fetchAll($sql){
+        // echo $sql
         return $this->pdo->query($sql)->fetchALL();
     }
+
+    // function q($sql){
+    //     return $this->pdo->query($sql)->fetchALL();
+    // }
 
 
 
