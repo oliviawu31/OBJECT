@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>物件導向</title>
-<style>
+    <style>
 
 
-</style>
+    </style>
 
 </head>
+
 <body>
-<h1>物件的宣告</h1>
+    <h1>物件的宣告</h1>
     <?php
 
     // 針對物件的抽象化宣告 / 抽象化=>不給定明確的值或內容
@@ -85,8 +87,8 @@ echo $cat->getName();
 
 ?>
 
-<h1>繼承</h1>
-<?php
+    <h1>繼承</h1>
+    <?php
 
 
 class Cat extends Animal implements Behavior{
@@ -128,9 +130,9 @@ echo "<br>";
 echo $mycat->jump();
 
 ?>
- <h1>靜態宣告</h1>
+    <h1>靜態宣告</h1>
 
- <?php
+    <?php
 class Dog extends Animal implements Behavior{
     protected $type='dog';
     protected $name='Doggy';
@@ -171,4 +173,5 @@ $dog5=new Dog('white');
 echo Dog::getCount();
 ?>
 </body>
+
 </html>
