@@ -1,10 +1,13 @@
 <?php
 
 class DB{
+    // 設定MySQL連線：主機名稱（localhost）、字符集(utf8)、資料庫名稱(db99)
     protected $dsn="mysql:host=localhost;charset=utf8;dbname=db20";
+    // 存儲 PDO（PHP Data Objects）物件，用來與資料庫進行交互
     protected $pdo;
     protected $table;
 
+    // 當創建DB物件時，建構仔會被執行，並將資料表名稱$table儲存到物件中，然後創建一個
     function __construct($table){
         $this->table=$table;
         $this->pdo=new PDO($this->dsn,'root','');
@@ -20,7 +23,7 @@ class DB{
      */
     function all(...$arg){
         $sql="SELECT * FROM $this->table ";
-        if(!empty($arg[0])){
+        if(!empty($arg[0])){  //如果有條件，則添加
             if(is_array($arg[0])){
 
                 $where=$this->a2s($arg[0]);
