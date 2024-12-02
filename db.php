@@ -17,6 +17,23 @@ class DB{
     }
 
     /**
+     * 方便使用個個聚合函式
+     * 
+     */
+    function math($math,$col='id',where=[]){
+        $sql="SELECT $math(`$col`) FROM $this->table";
+        if(!empty($where)){
+            $tmp=$this->A2s($where);
+            $sql=$sql. " WHERE ". join(" && ", $tmp);
+        }
+        return $this->pdo->query($sql)->fetchColum();
+
+    }
+
+
+
+
+    /**
      * 撈出全部資料 
      * 1.整張資料表
      * 2.有條件
@@ -145,14 +162,16 @@ $DEPT=new DB('dept');
 // 1.如果是要撈全部資料時
 // $dept=$DEPT->all(" Order by `id` DESC ");
 //2.只要找單一筆資料時
-// $dept=$DEPT->find(['code'=>'401']);
+$dept=$DEPT->find(['code'=>'401']);
 //3.刪除
 // $DEPT->del(2);
 // $DEPT->del(['code'=>'401']);
 
-//如果有id 就無法新增 
-$DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊發展部']);
-dd($dept);
+// //如果有id 就無法新增 
+// $DEPT->save(['code'=>'504','id'=>'7','name'=>'資訊發展部']);
+// dd($dept);
 
+
+echo $DEPT->math('max','id',['code'=>'503']);
 
 ?>
