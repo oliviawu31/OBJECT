@@ -20,7 +20,7 @@ class DB{
      * 方便使用個個聚合函式
      * 
      */
-    function math($math,$col='id',where=[]){
+    function math($math,$col='id',$where=[]){
         $sql="SELECT $math(`$col`) FROM $this->table";
         if(!empty($where)){
             $tmp=$this->A2s($where);
